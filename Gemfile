@@ -30,3 +30,6 @@ gem 'pg'
 
 # Foundation to make things pretty
 gem 'foundation-rails'
+
+# Awesome icons
+gem 'font-awesome-sass'
