@@ -12,8 +12,12 @@
   </head>
 
   <body>
-
-    <%= yield %>
+          <div class="small-2 medium-2 large-2 columns astro-side-bar">
+              <%= render partial: "shared/navbar" %>
+          </div>
+          <div class="small-10 medium-10 large-10 columns">
+              <%= yield %>
+          </div>
     <%= javascript_include_tag "application" %>
   </body>
 </html>
