@@ -27,3 +27,6 @@ group :doc do
 end
 
 gem 'pg'
+
+# Foundation to make things pretty
+gem 'foundation-rails'
