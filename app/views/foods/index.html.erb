@@ -34,8 +34,8 @@
             <span class="<%='all-out' if f.quantity == 0 %>">                
                 <%= link_to( food_path(f) , :data=>{:colorbox => true,
                             :colorbox_iframe=>true,
-                            :colorbox_height=>"50%",
-                            :colorbox_width=>"50%" }) do %>
+                            :colorbox_height=>"75%",
+                            :colorbox_width=>"75%" }) do %>
                     <%= f.display_name %>
                 <% end %>
             </span>
