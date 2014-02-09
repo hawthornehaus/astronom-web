@@ -107,21 +107,24 @@
   
   // setup the graphs we'll care about
   graphs = {};
-  gon.nutrients.forEach(n) {
-	  graphs.n = {};
-	  graphs.n.label = n;
-	  graphs.n.data = [];
-  };
+  gon.nutrients.forEach( function(n){
+	  graphs[n] = {};
+	  graphs[n].label = n;
+	  graphs[n].data = [];
+  });
   
   // gon.meals is ordered by time
   gon.meals.forEach( function(meal) {
 	  // for each nutrient in push in the thing
-	  graphs.n.data.push( 1 );
-	  graphs.n.lines = { show : true };
-	  graphs.n.points = { show : true };
+	  //meal.
+	  graphs[n].data.push( 1 );
+	  graphs[n].lines = { show : true };
+	  graphs[n].points = { show : true };
   });
-
-  graph = Flotr.draw(container, Object.values(graphs) , {
+  
+  console.log(graphs);
+  
+  graph = Flotr.draw(container, _.values(graphs) , {
       xaxis : {
         noTicks : 7,              // Display 7 ticks.
         tickFormatter : ticksFn,  // Displays tick values between brackets.
