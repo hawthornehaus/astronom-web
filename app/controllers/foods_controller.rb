@@ -22,6 +22,7 @@ class FoodsController < ApplicationController
   def show
     params.permit(:id, :format)
     @food = Food.where(id: params[:id]).first
+    gon.nutrients = @food.nutrients?
 
     respond_to do |format|
       format.html { render "show", layout: "callout"}
