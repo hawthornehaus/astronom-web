@@ -60,6 +60,12 @@ class NutrientDataImport
   end
 
 
+  def self.units_for(nutrient_name: nutrient_name)
+    key, entry = HEADER_SETTINGS.find { |(k, v)| v[:name] == nutrient_name }
+    entry[:units]
+  end
+
+
   HEADER_SETTINGS = {
     'Water_(g)' => {
       name:   'water',

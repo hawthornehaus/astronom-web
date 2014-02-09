@@ -3,6 +3,24 @@ AstronomWeb::Application.routes.draw do
     resources :meals, :foods, :astronauts
 
     get 'inventory' => 'inventory#inventory'
+
+    get '/day_snapshots/:name',
+        to: 'snapshots#show',
+        defaults: {
+          end_time:   -> { Time.now },
+          start_time: -> { Time.now - 1.day }
+        }
+
+    get '/week_snapshots/:name',
+        to: 'snapshots#show',
+        defaults: {
+          end_time:   -> { Time.now },
+          start_time: -> { Time.now - 1.week }
+        }
+
+    get '/snapshots/:id',
+        to: 'snapshots#show'
+
     root 'static#landing'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
