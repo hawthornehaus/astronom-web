@@ -3,7 +3,7 @@ class MealsController < ApplicationController
   def create
     meal_event = MealEvent.new(params: params)
 
-    respond_do do |format|
+    respond_to do |format|
       if meal_event.valid?
         if meal_event.commit!
           format.json { head :ok }
@@ -16,5 +16,8 @@ class MealsController < ApplicationController
     end
 
   end
+
+  def new
+  end 
 
 end
