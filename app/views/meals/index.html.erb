@@ -1,6 +1,17 @@
 <h1>Review Meals</h1>
+<% if @astro %>
+    <h2>(showing meals for <%=@astro.name%>)</h2>
+<% end %>
 
 <div class="inventory-pane">
+    <% if @astro %>
+	<div class="row">
+		<div class="small-12 medium-12 large-12 columns">
+		<div id="graph-container" style="width:100%; height:400px">
+		</div>		
+    </div>
+<% end %>
+
     <div class="row">
         <div class="small-12 medium-12 large-12 columns">
             <%= paginate @meals %>
@@ -26,8 +37,8 @@
         <div class="small-6 medium-6 large-6 columns">
             <%= link_to( food_path(m.food) , :data=>{:colorbox => true,
                         :colorbox_iframe=>true,
-                        :colorbox_height=>"50%",
-                        :colorbox_width=>"50%" }) do %>
+                        :colorbox_height=>"75%",
+                        :colorbox_width=>"75%" }) do %>
                 <%= m.food.display_name %>
             <% end %>
         </div>

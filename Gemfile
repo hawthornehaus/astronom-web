@@ -43,3 +43,6 @@ end
 
 #pagination
 gem 'kaminari'
+
+# gon
+gem 'gon'

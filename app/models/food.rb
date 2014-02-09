@@ -23,4 +23,29 @@ class Food < ActiveRecord::Base
       quantity: DEFAULT_QUANTITY)
   end
 
+  def nutrients?
+      nutr = []
+
+      # sort out units
+      nutrient_table = {}
+
+      self.nutrition.each do |n|
+          nutrient_name = n[0].chomp("_units")
+
+          nutrient_table[nutrient_name] ||= {}
+
+          if nutrient_name != n[0]
+            # handle units measure 
+            nutrient_table[nutrient_name]["units"] = n[1]
+          else
+             #handle amount
+            nutrient_table[nutrient_name]["amount"] = n[1]
+          end
+      end
+
+      nutrient_table.each do |n|
+          nutr << n
+      end
+  end
+
 end

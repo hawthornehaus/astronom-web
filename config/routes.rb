@@ -21,6 +21,7 @@ AstronomWeb::Application.routes.draw do
     get '/snapshots/:id',
         to: 'snapshots#show'
 
+    get '/review' => "static#review"
     root 'static#landing'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

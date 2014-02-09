@@ -29,6 +29,11 @@ class MealsController < ApplicationController
   end
 
   def index
-    @meals = Meal.order(:occurred_at).page params[:page]
+      if params[:astro]
+      @astro = Astronaut.find_by_name(params[:astro])
+      @meals = Meal.where("astronaut_id = ?", @astro.id).order(:occurred_at).page params[:page]
+      else
+      @meals = Meal.order(:occurred_at).page params[:page]
+      end
   end
 end
