@@ -7,15 +7,15 @@ AstronomWeb::Application.routes.draw do
     get '/day_snapshots/:name',
         to: 'snapshots#show',
         defaults: {
-          end_time:   -> { Time.now },
-          start_time: -> { Time.now - 1.day }
+          end_time:   Time.now.to_s,
+          start_time: (Time.now - 1.day).to_s
         }
 
     get '/week_snapshots/:name',
         to: 'snapshots#show',
         defaults: {
-          end_time:   -> { Time.now },
-          start_time: -> { Time.now - 1.week }
+          end_time:   Time.now.to_s,
+          start_time: (Time.now - 1.week).to_s
         }
 
     get '/snapshots/:id',
