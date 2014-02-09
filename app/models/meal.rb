@@ -9,5 +9,4 @@ class Meal < ActiveRecord::Base
             {:earlier_date => earlier_date, :later_date => later_date})
     end
   end
-
 end

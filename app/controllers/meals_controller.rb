@@ -25,7 +25,12 @@ class MealsController < ApplicationController
   end
 
   def show
-    @meals = Meal.all
+#    @meals = Meal.all
+    @meal = Meal.find(:id=> params[:id])
+  end
+
+  def index
+    @meals = Meal.paginate(:page => params[:page]
   end
 
 end

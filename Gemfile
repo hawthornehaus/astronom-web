@@ -37,3 +37,5 @@ gem 'font-awesome-sass'
 # colorbox rails
 gem 'colorbox-rails'
 
+#pagination
+gem 'kaminari'
