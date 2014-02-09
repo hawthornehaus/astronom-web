@@ -3,6 +3,9 @@ AstronomWeb::Application.routes.draw do
     resources :meals, :foods, :astronauts
 
     root 'static#landing'
+
+    get 'inventory' => 'inventory#inventory'
+    get 'review' => 'review#review'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

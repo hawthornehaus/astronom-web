@@ -1,0 +1,21 @@
+.astro-side-bar {
+    color: $priColor;
+    background-color: $backgroundColor;
+    height:100%;
+    border-right:thick solid $secColor;
+}
+
+.astro-side-bar-button{
+    font-size: 1.4em !important;
+    
+    a{
+    padding:5px;
+        color: $priColor !important;
+        background-color: $backgroundColor !important;
+        
+        &:hover {
+            background-color: $priColor !important;
+            color: $backgroundColor !important;
+        }
+    }
+}
