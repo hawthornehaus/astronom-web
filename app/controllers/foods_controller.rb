@@ -30,7 +30,7 @@ class FoodsController < ApplicationController
   end
 
   def index
-      @foods = Food.order('quantity DESC').all.to_a
+      @foods = Food.order(:quantity).page params[:page]
 
       respond_to do |format|
         format.html

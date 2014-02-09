@@ -1,6 +1,12 @@
 <h1>Inventory</h1>
 
 <div class="inventory-pane">
+    <div class="row">
+        <div class="small-12 medium-12 large-12 columns">
+            <%= paginate @foods %>
+        </div>
+    </div>
+    <br>
     <div class="row inventory-item inventory-item">
         <div class="small-2 medium-2 large-2 columns">
             <strong>UPC</strong>
@@ -41,5 +47,5 @@
             </div>
         </div>
     </div>
-    <% end %>
+<% end %>
 </div>

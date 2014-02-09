@@ -25,7 +25,10 @@ class MealsController < ApplicationController
   end
 
   def show
-    @meals = Meal.all
+    @meal = Meal.find(:id=> params[:id])
   end
 
+  def index
+    @meals = Meal.order(:occurred_at).page params[:page]
+  end
 end
