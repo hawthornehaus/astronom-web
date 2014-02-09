@@ -1,16 +1,39 @@
 <h1>Review Meals</h1>
 
 <div class="inventory-pane">
+    <div class="row">
+        <div class="small-12 medium-12 large-12 columns">
+            <%= paginate @meals %>
+        </div>
+    </div>
+    <br>
     <div class="row inventory-item inventory-item">
-        <div class="small-9 medium-9 large-9 columns">
+        <div class="small-3 medium-3 large-3 columns">
+            <strong>Time</strong>
+        </div>
+        <div class="small-6 medium-6 large-6 columns">
             <strong>Meal</strong>
+        </div>
+        <div class="small-3 medium-3 large-3 columns">
+            <strong>Eater</strong>
         </div>
     </div>
     <% @meals.each do |m| %>
     <div class="row inventory-item inventory-item">
-        <div class="small-9 medium-9 large-9 columns">
+        <div class="small-3 medium-3 large-3 columns">
+            <%= m.occurred_at %>
+        </div>
+        <div class="small-6 medium-6 large-6 columns">
+            <%= link_to( food_path(m.food) , :data=>{:colorbox => true,
+                        :colorbox_iframe=>true,
+                        :colorbox_height=>"50%",
+                        :colorbox_width=>"50%" }) do %>
+                <%= m.food.display_name %>
+            <% end %>
+        </div>
+        <div class="small-3 medium-3 large-3 columns">
+            <%= m.astronaut.name %>
         </div>
     </div>
     <% end %>
-    <%= will_paginate @meals %>
 </div>
