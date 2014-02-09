@@ -16,11 +16,13 @@ class MealEvent
 
 
   def commit!
-    return valid? &&
-      Meal.create(
-        astronaut: astronaut,
-        food: food,
-        occurred_at: occurred_at)
+    meal = Meal.new(
+      astronaut: astronaut,
+      food: food,
+      occurred_at: occurred_at)
+    if valid? && meal.create
+      food.decrement!(:quantity)
+    end
   end
 
 
