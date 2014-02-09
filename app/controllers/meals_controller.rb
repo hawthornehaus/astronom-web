@@ -18,7 +18,6 @@ class MealsController < ApplicationController
         format.html { head :not_acceptable }
       end
     end
-
   end
 
   def new

@@ -18,6 +18,16 @@ class FoodsController < ApplicationController
   end
 
   def new
-  end 
+  end
+
+
+  def show
+    params.permit(:id, :format)
+    food = Food.where(id: params[:id]).first
+
+    respond_to do |format|
+      format.json { render json: FoodWithNutrition.new(food).as_json }
+    end
+  end
 
 end
