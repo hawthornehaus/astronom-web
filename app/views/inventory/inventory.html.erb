@@ -1,6 +1,6 @@
 <h1>Inventory</h1>
 
-<div>
+<div class="inventory-pane">
     <div class="row inventory-item inventory-item">
         <div class="small-9 medium-9 large-9 columns">
             <strong>Food Item</strong>
@@ -15,15 +15,16 @@
     <% @foods.each do |f| %>
     <div class="row inventory-item inventory-item">
         <div class="small-9 medium-9 large-9 columns">
-            <%= f.display_name %>
+            <span class="<%='all-out' if f.quantity == 0 %>">
+                <%= f.display_name %>
+            </span>
         </div>
 
         <div class="small-3 medium-3 large-3 columns">
-            <div class="text-right">
+            <div class="text-right <%='all-out' if f.quantity == 0 %>">
                 <%= f.quantity %>
             </div>
         </div>
     </div>
     <% end %>
-
 </div>
