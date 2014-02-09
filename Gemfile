@@ -39,7 +39,6 @@ gem 'font-awesome-sass'
 # colorbox rails
 gem 'colorbox-rails'
 
-
 group :production do
   gem 'rails_12factor'
 end
