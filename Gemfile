@@ -33,3 +33,6 @@ gem 'foundation-rails'
 
 # Awesome icons
 gem 'font-awesome-sass'
+
+# colorbox rails
+gem 'colorbox-rails'

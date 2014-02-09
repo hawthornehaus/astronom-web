@@ -25,8 +25,13 @@
         </div>
 
         <div class="small-7 medium-7 large-7 columns">
-            <span class="<%='all-out' if f.quantity == 0 %>">
-                <%= f.display_name %>
+            <span class="<%='all-out' if f.quantity == 0 %>">                
+                <%= link_to( food_path(f) , :data=>{:colorbox => true,
+                            :colorbox_iframe=>true,
+                            :colorbox_height=>"50%",
+                            :colorbox_width=>"50%" }) do %>
+                    <%= f.display_name %>
+                <% end %>
             </span>
         </div>
 
