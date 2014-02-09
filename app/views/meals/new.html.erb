@@ -1,1 +1,23 @@
 <h1>Eat a meal!</h1>
+
+<%= form_for @meal do |f| %>
+
+  <div>
+    <%= label_tag 'user', 'Astronaut Name', for: 'user' %>
+    <%= text_field_tag 'user', '' %>
+  </div>
+
+  <div>
+    <%= label_tag 'id', 'Select Food', for: 'id' %>
+    <%= select_tag 'id', options_for_select(@foods.map { |f| [f.display_name, f.name] }), include_blank: true %>
+  </div>
+
+  <%= hidden_field_tag 'time', Time.now.to_s %>
+
+  <%= hidden_field_tag 'source', 'web' %>
+
+  <div>
+    <%= f.submit 'Eat It!' %>
+  </div>
+
+<% end %>

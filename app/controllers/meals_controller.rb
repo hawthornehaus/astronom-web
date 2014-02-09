@@ -8,7 +8,7 @@ class MealsController < ApplicationController
       if meal_event.valid?
         if meal_event.commit!
           format.json { head :created }
-          format.html { head :created }
+          format.html { redirect_to controller: 'meals', action: 'index' }
         else
           format.json { head :not_acceptable }
           format.html { head :not_acceptable }
@@ -21,7 +21,8 @@ class MealsController < ApplicationController
   end
 
   def new
-
+    @meal = Meal.new
+    @foods = Food.all
   end
 
   def show
