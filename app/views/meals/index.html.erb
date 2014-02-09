@@ -52,97 +52,72 @@
 
 <% if @astro %>
 <script>
-(function basic_axis(container) {
-
-  var
-    d1 = [],
-    d2 = [],
-    d3 = [],
-    d4 = [],
-    d5 = [],                        // Data
-    ticks = [[ 0, "Lower"], 10, 20, 30, [40, "Upper"]], // Ticks for the Y-Axis
-    graph;
-        
-  for(var i = 0; i <= 10; i += 0.1){
-    d1.push([i, 4 + Math.pow(i,1.5)]);
-    d2.push([i, Math.pow(i,3)]);
-    d3.push([i, i*5+3*Math.sin(i*4)]);
-    d4.push([i, i]);
-    if( i.toFixed(1)%1 == 0 ){
-      d5.push([i, 2*i]);
-    }
-  }
-        
-  d3[30][1] = null;
-  d3[31][1] = null;
-
-  function ticksFn (n) { return '('+n+')'; }
-  
-  var data = [];
-  var ticks = [];
-  var graphs = [];
-  var care_about = ["water", "energy", "sodium", "total_sugar", "carbohydrates"    ];
-  
-  var i = 0;
-  gon = {
-	  nutrients: ["water", "energy", "sodium", "total_sugar", "carbohydrates" ],
-	  meals: []
-  };
-  /*
-  gon = {
-	  nutrients: ["water", "energy", "sodium", "total_sugar", "carbohydrates" ];
-  }
-  
-  Object.keys(gon.nutrients).forEach( function (k) {
-		  if (_.contains(care_about,k) ) {
-		  var nut = gon.nutrients[k];
-		  var graph = {};
-		  graph.label: 
-		  data.push( [i, nut.amount]);
-		  ticks.push( [i, k] );
-		  i++;
+(function basic_axis(container, url) {
+	
+	
+	$.ajax( { url: url, success: function(meals) {
+		console.log(meals);
+		doGraph(meals);
+	}});
+	
+	var doGraph = function (meals) {
+    
+	  var data = [];
+	  var ticks = [];
+	  var graphs = [];
+	  var care_about = ["water", "energy", "sodium", "total_sugar", "carbohydrates"    ];
+	  var themin = 0;
+	  var themax = 0;
+	  
+		// grab the info from the server
+	  
+	  // setup the graphs we'll care about
+	  graphs = {};
+	  care_about.forEach( function(n){
+		  graphs[n] = {};
+		  graphs[n].label = n;
+		  graphs[n].data = [];
+	  });
+	  
+	  // gon.meals is ordered by time
+	  meals.forEach( function(meal) {
+		  _.keys(meal.nutrients).forEach( function (n) {
+			  if ( _.contains(care_about, n) ) {
+		  // for each nutrient in push in the thing
+		  var dat = meal.nutrients[n][0];
+		  //if ( dat < themin ) {  themin = dat; }
+		  //if (dat > themax ) {themax = dat; }
+		  graphs[n].data.push( [new Date(meal.time), dat] );
+		  graphs[n].lines = { show : true };
+		  graphs[n].points = { show : true };
 	  }
-  });
-  */
-  
-  // setup the graphs we'll care about
-  graphs = {};
-  gon.nutrients.forEach( function(n){
-	  graphs[n] = {};
-	  graphs[n].label = n;
-	  graphs[n].data = [];
-  });
-  
-  // gon.meals is ordered by time
-  gon.meals.forEach( function(meal) {
-	  // for each nutrient in push in the thing
-	  //meal.
-	  graphs[n].data.push( 1 );
-	  graphs[n].lines = { show : true };
-	  graphs[n].points = { show : true };
-  });
-  
-  console.log(graphs);
-  
-  graph = Flotr.draw(container, _.values(graphs) , {
-      xaxis : {
-        noTicks : 7,              // Display 7 ticks.
-        tickFormatter : ticksFn,  // Displays tick values between brackets.
-        min : 1,                  // Part of the series is not displayed.
-        max : 7.5                 // Part of the series is not displayed.
-      },
-      yaxis : {
-        ticks : ticks,            // Set Y-Axis ticks
-        max : 40                  // Maximum value along Y-Axis
-      },
-      grid : {
-        verticalLines : true,
-        
-      },
-      legend : {
-        position : 'nw'
-      },
-  });
-})(document.getElementById("graph-container"));
+		});
+	  });
+	  
+	  console.log(_.values(graphs));
+	  
+	  graph = Flotr.draw(container,
+						 _.values(graphs), {
+		  xaxis : {
+			//noTicks : 7,              // Display 7 ticks.
+			autoscale:true,
+			mode:"time",
+		  },
+		  yaxis : {
+//			ticks : ticks,            // Set Y-Axis ticks
+			autoscale:true,
+			//max : themax                  // Maximum value along Y-Axis
+			
+		  },
+		  grid : {
+			verticalLines : true,
+			
+		  },
+		  legend : {
+			position : 'nw'
+		  },
+	  });
+	};
+})(document.getElementById("graph-container"), "/week_snapshots/<%=@astro.name%>?interval_in_minutes=60");
 </script>
 <% end %>

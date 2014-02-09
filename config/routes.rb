@@ -15,7 +15,8 @@ AstronomWeb::Application.routes.draw do
         to: 'snapshots#show',
         defaults: {
           end_time:   Time.now.to_s,
-          start_time: (Time.now - 1.week).to_s
+          start_time: (Time.now - 1.week).to_s,
+          interval_in_minutes: 15
         }
 
     get '/snapshots/:id',
