@@ -24,4 +24,8 @@ class MealsController < ApplicationController
 
   end
 
+  def show
+    @meals = Meal.all
+  end
+
 end

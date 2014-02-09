@@ -17,8 +17,9 @@ def make_food
     name = "#{PrepType.sample} #{MeatType.sample} #{FormType.sample}"
     upc = Random.rand(999999)
     dname = ["Chef's Favorite ", "Mom's Famous ", "", "Quality "].sample + name + [" Deluxe"," Grande"," de Especial", ""].sample
-    Food.create(upc:upc, display_name: dname, name:name, quantity: Random.rand(50)).save
+    quantity = [ Random.rand(50) - 15,0].max
+    Food.create(upc:upc, display_name: dname, name:name, quantity: quantity).save
 end
 
-20.times do make_food end
+50.times do make_food end
 

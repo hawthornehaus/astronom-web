@@ -1,0 +1,18 @@
+.meal-pane {
+    color: $priColor;
+
+}
+    .all-out{
+        color: $auxColor;
+    }
+
+.meal-item{
+    margin-bottom:5px;
+    padding: 5px;
+
+    &:hover {
+        background-color: $secColor;
+        color: $backgroundColor;
+    }
+}
+
