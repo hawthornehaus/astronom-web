@@ -33,7 +33,7 @@ class NutrientDataImport
         name = name.chars.drop(1).join if name.start_with?('0')
 
         foods << Food.new(
-          name:         row[NAME_COLUMN],
+          name:         name,
           display_name: row[DISPLAY_NAME_COLUMN].gsub(/\,/, ', ').titleize,
           nutrition:    parse_nutrition(row),
           quantity:     DEFAULT_QUANTITY
