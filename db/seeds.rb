@@ -5,3 +5,20 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+
+PrepType = [ "Raw", "Cooked", "Boiled", "Baked", "Fried", "Glazed", "Grilled" ]
+MeatType = [ "Chicken", "Beef", "Pork", "Human", "Turkey", "Veal", "Spinach", "Artichoke", "Egg" ]
+FormType = [ "Soup", "Sandwich", "Salad", "Puree", "Taco", "Stirfry", "Punch", "Surprise" ]
+
+Food.all.to_a.map(&:destroy)
+
+def make_food
+    name = "#{PrepType.sample} #{MeatType.sample} #{FormType.sample}"
+    upc = Random.rand(999999)
+    dname = ["Chef's Favorite ", "Mom's Famous ", "", "Quality "].sample + name + [" Deluxe"," Grande"," de Especial", ""].sample
+    Food.create(upc:upc, display_name: dname, name:name, quantity: Random.rand(50)).save
+end
+
+20.times do make_food end
+
