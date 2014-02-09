@@ -18,7 +18,7 @@ def make_food
     upc = Random.rand(999999)
     dname = ["Chef's Favorite ", "Mom's Famous ", "", "Quality "].sample + name + [" Deluxe"," Grande"," de Especial", ""].sample
     quantity = [ Random.rand(50) - 15,0].max
-    Food.create(upc:upc, display_name: dname, name:name, quantity: quantity).save
+#    Food.create(upc:upc, display_name: dname, name:name, quantity: quantity).save
 end
 
 50.times do make_food end
