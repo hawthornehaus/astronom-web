@@ -1,0 +1,17 @@
+<h2><%= @food.display_name %> </h2>
+<hr>
+<ul>
+    <li> <strong>UPC:</strong> <%= @food.upc%></li>
+    <li> <strong>Quantity remaining:</strong> <%= @food.quantity%></li>
+    <li> <strong>Nutrients:</strong>
+        <ul>
+            <% @food.nutrition.each do |n| %>
+                <li> </li>
+            <% end %>
+        </ul>
+    </li>
+</ul>
+
+<script>
+</script>
+

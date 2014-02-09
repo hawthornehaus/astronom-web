@@ -21,15 +21,16 @@ class FoodsController < ApplicationController
 
   def show
     params.permit(:id, :format)
-    food = Food.where(id: params[:id]).first
+    @food = Food.where(id: params[:id]).first
 
     respond_to do |format|
-      format.json { render json: FoodWithNutrition.new(food).as_json }
+      format.html { render "show", layout: "callout"}
+      format.json { render json: FoodWithNutrition.new(@food).as_json }
     end
   end
 
   def index
-      @foods = Food.find(:all, :order=>"quantity").reverse
+      @foods = Food.order('quantity DESC').all.to_a
 
       respond_to do |format|
         format.html

@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require colorbox-rails
+//= require flotr2.min
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
