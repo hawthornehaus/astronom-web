@@ -20,7 +20,7 @@ class MealEvent
       astronaut: astronaut,
       food: food,
       occurred_at: occurred_at)
-    if valid? && meal.create
+    if valid? && meal.save
       food.decrement!(:quantity)
     end
   end
