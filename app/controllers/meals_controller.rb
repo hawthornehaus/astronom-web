@@ -7,18 +7,22 @@ class MealsController < ApplicationController
     respond_to do |format|
       if meal_event.valid?
         if meal_event.commit!
-          format.json { head :ok }
+          format.json { head :created }
+          format.html { head :created }
         else
           format.json { head :not_acceptable }
+          format.html { head :not_acceptable }
         end
       else
         format.json { head :not_acceptable }
+        format.html { head :not_acceptable }
       end
     end
 
   end
 
   def new
-  end 
+
+  end
 
 end
