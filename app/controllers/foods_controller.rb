@@ -14,7 +14,6 @@ class FoodsController < ApplicationController
         format.json { head :not_acceptable }
       end
     end
-
   end
 
   def new
