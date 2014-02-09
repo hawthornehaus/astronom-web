@@ -1,8 +1,29 @@
 <h1>Inventory</h1>
 
 <div>
+    <div class="row inventory-item inventory-item">
+        <div class="small-9 medium-9 large-9 columns">
+            <strong>Food Item</strong>
+        </div>
+
+        <div class="small-3 medium-3 large-3 columns">
+            <div class="text-right">
+                <strong>Quantity</strong>
+            </div>
+        </div>
+    </div>
     <% @foods.each do |f| %>
-        <%= f.inspect %>
+    <div class="row inventory-item inventory-item">
+        <div class="small-9 medium-9 large-9 columns">
+            <%= f.display_name %>
+        </div>
+
+        <div class="small-3 medium-3 large-3 columns">
+            <div class="text-right">
+                <%= f.quantity %>
+            </div>
+        </div>
+    </div>
     <% end %>
 
 </div>

@@ -1,0 +1,15 @@
+<h1>Inventory</h1>
+
+<div>
+    <% @foods.each do |f| %>
+    <div class="row">
+        <div class="large-3 columns">
+            <%= f.display_name %>
+        </div>
+        <div class="large-3 columns">
+            <%= f.name %>
+        </div>
+    </div>
+    <% end %>
+
+</div>
