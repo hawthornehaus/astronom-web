@@ -1,6 +1,6 @@
 class MealEvent
 
-  attr_reader :params, :errors
+  attr_reader :params, :errors, :astronaut, :occurred_at, :food
 
   def initialize(params: )
     params        = extract_params(params)
@@ -13,6 +13,18 @@ class MealEvent
   def valid?
     errors.blank?
   end
+
+
+  def commit!
+    return valid? &&
+      Meal.create(
+        astronaut: astronaut,
+        food: food,
+        occurred_at: occurred_at)
+  end
+
+
+private #######################################################################
 
 
   def extract_params(params)
@@ -30,9 +42,9 @@ class MealEvent
   end
 
 
-  def determine_astronaut(user)
+  def determine_astronaut(params)
     name = params.fetch(:user)
-    return Astronaut.find_or_create(name: name)
+    return Astronaut.find_or_create_by(name: name)
   rescue
     add_error('Error determining astronaut.')
   end

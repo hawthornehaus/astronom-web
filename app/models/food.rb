@@ -1,21 +1,25 @@
 class Food < ActiveRecord::Base
-  store_accessor :nutrition, :sodium, :protien # Add more nutrition options here!
 
   DEFAULT_QUANTITY = 50
 
-  def build_from_upc(name: food_name)
+  has_many :meals
+
+  store_accessor :nutrition, :sodium, :protien # Add more nutrition options here!
+
+
+  def self.build_from_upc(name: )
     create(
-      name: food_name,
-      display_name: food_name.titleize,
-      upc: food_name,
+      name: name,
+      display_name: name.titleize,
+      upc: name,
       quantity: DEFAULT_QUANTITY)
   end
 
 
-  def build_other(name: food_name)
+  def self.build_other(name: )
     create(
-      name: food_name,
-      display_name: food_name.titleize,
+      name: name,
+      display_name: name.titleize,
       quantity: DEFAULT_QUANTITY)
   end
 

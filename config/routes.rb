@@ -2,7 +2,6 @@ AstronomWeb::Application.routes.draw do
 
     resources :meals, :foods, :astronauts
 
-
     get 'inventory' => 'inventory#inventory'
     get 'review' => 'review#review'
     root 'static#landing'
