@@ -1,0 +1,22 @@
+<h1>Choose an astronaut to review</h1>
+
+<div>
+        <div class="row">        
+            <div class="small-12 medium-12 large-12 columns">
+                <a href="/meals">
+                    All meals
+                </a>
+            </div>
+        </div>
+        <br>
+
+    <% @astros.each do |a| %>
+        <div class="row">        
+            <div class="small-12 medium-12 large-12 columns">
+                <a href="/meals/?astro=<%=a.name%>">
+                    <%= a.name %>
+                </a>
+            </div>
+        </div>
+    <% end %>
+</div>

@@ -1,11 +1,16 @@
 <h1>Review Meals</h1>
+<% if @astro %>
+    <h2>(showing meals for <%=@astro.name%>)</h2>
+<% end %>
 
 <div class="inventory-pane">
+    <% if @astro %>
 	<div class="row">
 		<div class="small-12 medium-12 large-12 columns">
 		<div id="graph-container" style="width:100%; height:400px">
 		</div>		
-	</div>
+    </div>
+<% end %>
 
     <div class="row">
         <div class="small-12 medium-12 large-12 columns">
