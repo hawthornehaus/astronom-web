@@ -1,41 +1,49 @@
-<h2><%= @food.display_name %> </h2>
-<hr>
 
+<div class="row food-info-header">
+    <div class="row">
+        <div class="small-6 medium-6 large-6 columns">
+            <strong>Quantity remaining:</strong> <%= @food.quantity%>
+        </div>
+        <div class="small-6 medium-6 large-6 columns food-logistics-quantity">
+            <strong>UPC:</strong> <%= @food.upc || "? ? ? "%>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 medium-12 large-12 columns food-logistics-name">
+            <%= @food.display_name %>
+        </div>
+    </div>
+</div>
 <div class="row">
-	<div class="small-offset-3 small-offset-3 large-offset-3 small-6 medium-6 large-6 columns">
-	<div id="graph-container" style="width:400px; height:400px">		
-	</div>
-	</div>
+	<div class="small-6 medium-6 large-6 columns">
+            <strong>Nutrients:</strong>
+                <ul>
+                    <div class="row">
+                        <div class="small-9 medium-9 large-9 columns">
+                            <strong>Name: </strong>
+                        </div>
+                        <div class="small-3 medium-3 large-3 columns">
+                            <strong>Amount: </strong>
+                        </div>
+                    </div>
+                    <% @food.nutrients?.each do |n| %>
+                    <div class="row">
+                        <div class="small-9 medium-9 large-9 columns">
+                            <%= n[0] %>
+                        </div>
+                        <div class="small-3 medium-3 large-3 columns">
+                            <%= "#{n[1]["amount"]} #{n[1]["units"]}"%>
+                        </div>
+                    </div>
+                    <% end %>
+                </ul>
+    </div>
+	<div class="small-6 medium-6 large-6 columns">
+        <div id="graph-container" style="width:400px; height:400px">		
+        </div>
+    </div>
 </div>
 
-<div>
-    <ul>
-        <li> <strong>UPC:</strong> <%= @food.upc%></li>
-        <li> <strong>Quantity remaining:</strong> <%= @food.quantity%></li>
-        <li> <strong>Nutrients:</strong>
-            <ul>
-                <div class="row">
-                    <div class="small-9 medium-9 large-9 columns">
-                        <strong>Name: </strong>
-                    </div>
-                    <div class="small-3 medium-3 large-3 columns">
-                        <strong>Amount: </strong>
-                    </div>
-                </div>
-                <% @food.nutrients?.each do |n| %>
-                <div class="row">
-                    <div class="small-9 medium-9 large-9 columns">
-                        <%= n[0] %>
-                    </div>
-                    <div class="small-3 medium-3 large-3 columns">
-                        <%= "#{n[1]["amount"]} #{n[1]["units"]}"%>
-                    </div>
-                </div>
-                <% end %>
-            </ul>
-        </li>
-    </ul>
-</div>
 
 <script>
 (function basic_radar(container) {
@@ -54,9 +62,8 @@
 	  i++;
   }
   });
-    //s1 = { label : 'Actual', data : [[0, 3], [1, 8], [2, 5], [3, 5], [4, 3], [5, 9]] },
-    console.log(data);
-    s1 = { data : data },
+  
+  s1 = { data : data },
     
   // Draw the graph.
   graph = Flotr.draw(container, [ s1], {

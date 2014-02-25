@@ -52,3 +52,22 @@
 
     }
 }
+
+.food-info-header {
+    background-color: transparentize($secColor, .6);
+    padding:15px;
+}
+
+.food-logistics-quantity
+{    
+    text-align:right;
+}
+
+.food-logistics-name
+{
+    padding: 15px;
+    line-height:80%;
+    font-size: 1.8em;
+}
+
+
