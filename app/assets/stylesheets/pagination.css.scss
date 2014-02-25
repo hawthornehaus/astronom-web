@@ -1,0 +1,17 @@
+.pagination
+{
+    width:100%;
+    text-align: center;
+    font-size: 1.4em;
+}
+.pagination.first
+{
+    float:left;
+    background-color: #f00;
+}
+.pagination.last
+{
+    float:right;
+    clear:right;
+    background-color: #f00;
+}
