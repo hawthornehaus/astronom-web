@@ -18,6 +18,9 @@
     <div class="small-6 medium-6 large-6 columns">
 <div class="food-pane">
         <div>
+            <% if @food.nutrients?["energy"] %>
+            <h2><strong>Energy</strong> <%= "#{@food.nutrients?['energy']["amount"]} #{@food.nutrients?['energy']["units"]}"%>
+            <% end %>
             <% if @food.nutrients?["water"] %>
             <h2><strong>Water</strong> <%= "#{@food.nutrients?['water']["amount"]} #{@food.nutrients?['water']["units"]}"%>
             <% end %>
@@ -31,22 +34,21 @@
             <h2><strong>Sodium</strong> <%= "#{@food.nutrients?['sodium']["amount"]} #{@food.nutrients?['sodium']["units"]}"%>
             <% end %>
         </div>
-            <strong>Nutrients:</strong>
                 <ul>
                     <div class="row">
-                        <div class="small-9 medium-9 large-9 columns">
-                            <strong>Name: </strong>
+                        <div class="small-6 medium-6 large-6 columns">
+                            <strong>Nutrient: </strong>
                         </div>
-                        <div class="small-3 medium-3 large-3 columns">
+                        <div class="small-6 medium-6 large-6 columns">
                             <strong>Amount: </strong>
                         </div>
                     </div>
                     <% @food.nutrients?.each do |n| %>
                     <div class="row">
-                        <div class="small-9 medium-9 large-9 columns">
+                        <div class="small-6 medium-6 large-6 columns">
                             <%= n[0] %>
                         </div>
-                        <div class="small-3 medium-3 large-3 columns">
+                        <div class="small-6 medium-6 large-6 columns">
                             <%= "#{n[1]["amount"]} #{n[1]["units"]}"%>
                         </div>
                     </div>
@@ -66,26 +68,36 @@
 
   // Fill series s1 and s2.
   var data = [];
+  var refdata = [];
   var ticks = [];
   var care_about = ["water", "energy", "sodium", "total_sugar", "carbohydrates"    ];
+  var refval = {
+	water: 3000.0,
+	energy: 3200.0,
+	sodium: 3000.0,
+	total_sugar: 38.0,
+	carbohydrates: 46.0
+  }
   
   var i = 0;
   Object.keys(gon.nutrients).forEach( function (k) {
 	  if (_.contains(care_about,k) ) {
-	  var nut = gon.nutrients[k];
-	  data.push( [i, nut.amount]);
-	  ticks.push( [i, k] );
-	  i++;
-  }
+          var nut = gon.nutrients[k];
+          data.push( [i, nut.amount/refval[k]]);
+          refdata.push( [i, 1] );
+          ticks.push( [i, k] );
+          i++;
+      }
   });
   
-  s1 = { data : data },
+  s1 = { data : data };
+  s2 = { data : refdata };
     
   // Draw the graph.
-  graph = Flotr.draw(container, [ s1], {
+  graph = Flotr.draw(container, [ s1, s2], {
     radar : { show : true}, 
     grid  : { circular : true, minorHorizontalLines : true}, 
-    yaxis : { min : 0, max : 800, minorTickFreq : 2}, 
+    yaxis : { min : 0, max : 1.2, minorTickFreq : .2}, 
     xaxis : { ticks : ticks}
   });
 })(document.getElementById("graph-container"));
