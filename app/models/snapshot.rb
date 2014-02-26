@@ -1,7 +1,9 @@
 class Snapshot
 
   attr_reader :start_time, :end_time, :astronaut, :meals,
-              :intervals, :interval_in_minutes
+              :intervals, :interval_in_minutes, :significance
+
+  SIGNIFICANCE = 6
 
   def initialize(params: params)
     params                  = params.permit(*allowed_param_keys)
@@ -9,6 +11,8 @@ class Snapshot
     @astronaut              = determine_astronaut(params)
     @meals                  = determine_meals(@start_time, @end_time)
     @interval_in_minutes    = determine_interval(params)
+    # Significance can be included as an API parameter later
+    @significance           = SIGNIFICANCE
   end
 
 
@@ -91,34 +95,41 @@ class Snapshot
     all_nutrients += losses.keys
 
     all_nutrients.each.with_object({}) do |name, nutrients|
-      nutrients[name] =
+      nutrients[name] = (
         current.fetch(name, 0) +
-        gains.fetch(name, 0) +
+        gains.fetch(name, 0) -
         losses.fetch(name, 0)
+      ).round(significance)
     end
+  end
+
+
+  def meal_occurred_between?(meal, earlier, later)
+    meal.occurred_at >= earlier && meal.occurred_at < later
   end
 
 
   def fetch_gains(earlier_time, later_time)
-    meals.select do |meal|
-      meal.occurred_at >= earlier_time && meal.occurred_at < later_time
-    end.map(&:food).map(&:nutrition).each.with_object({}) do |nutrition, acc|
-      # puts nutrition.count
-      nutrition.each do |(key, val)|
-        unless key.end_with?('_units')
-          acc[key] ||= 0
-          acc[key] += Integer(val)
+    relevant_meal_time  = ->(meal)      { meal.occurred_between?(earlier_time, later_time) }
+    reject_units        = ->(key, val)  { key.end_with?('_units') }
+    meals.
+      select(&relevant_meal_time).
+      map(&:food).
+      map(&:nutrition).
+      each.with_object({}) do |nutrition, gains_acc|
+        nutrition.reject(&reject_units).each do |key, val|
+          gains_acc[key] ||= 0.0
+          gains_acc[key] += Float(val)
         end
       end
-    end
   end
 
 
   def fetch_losses(earlier_time, later_time)
-    # ((later_time - earlier_time) / 60)
-    {}
+    # For now we are assuming male, since we do not have numbers for a female.
+    nl = NutrientLoss.new(from: earlier_time, to: later_time, gender: :male)
+    nl.all
   end
-
 
 
   def normalize_nutrient_keys

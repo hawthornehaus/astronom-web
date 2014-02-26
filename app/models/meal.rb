@@ -9,4 +9,10 @@ class Meal < ActiveRecord::Base
             {:earlier_date => earlier_date, :later_date => later_date})
     end
   end
+
+
+  def occurred_between?(earlier_time, later_time)
+    self.occurred_at >= earlier_time && self.occurred_at < later_time
+  end
+
 end
