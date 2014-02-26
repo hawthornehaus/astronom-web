@@ -14,8 +14,23 @@
         </div>
     </div>
 </div>
-<div class="row">
-	<div class="small-6 medium-6 large-6 columns">
+<div class="row" style="margin:10px;">
+    <div class="small-6 medium-6 large-6 columns">
+<div class="food-pane">
+        <div>
+            <% if @food.nutrients?["water"] %>
+            <h2><strong>Water</strong> <%= "#{@food.nutrients?['water']["amount"]} #{@food.nutrients?['water']["units"]}"%>
+            <% end %>
+            <% if @food.nutrients?["total_sugar"] %>
+                <h2><strong>Sugar</strong> <%= "#{@food.nutrients?['total_sugar']["amount"]} #{@food.nutrients?['total_sugar']["units"]}"%>
+            <% end %>
+            <% if @food.nutrients?["carbohydrates"] %>
+            <h2><strong>Carbs</strong> <%= "#{@food.nutrients?['carbohydrates']["amount"]} #{@food.nutrients?['carbohydrates']["units"]}"%>
+            <% end %>
+            <% if @food.nutrients?["sodium"] %>
+            <h2><strong>Sodium</strong> <%= "#{@food.nutrients?['sodium']["amount"]} #{@food.nutrients?['sodium']["units"]}"%>
+            <% end %>
+        </div>
             <strong>Nutrients:</strong>
                 <ul>
                     <div class="row">
@@ -37,6 +52,7 @@
                     </div>
                     <% end %>
                 </ul>
+</div>
     </div>
 	<div class="small-6 medium-6 large-6 columns">
         <div id="graph-container" style="width:400px; height:400px">		

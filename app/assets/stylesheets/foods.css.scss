@@ -70,4 +70,8 @@
     font-size: 1.8em;
 }
 
-
+.food-pane
+{
+    padding:10px;
+    background-color: transparentize($secColor, .6);
+}
